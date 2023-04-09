@@ -1,0 +1,37 @@
+@use './variables' as v;
+@use './mixins' as m;
+
+html {
+  font-size: 62.5%;
+  margin: 0;
+  background-image: url('../../assets/img/fondo.jpg');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-attachment: fixed;
+}
+
+.appContenedor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: hue-rotate(320deg) brightness(120%) contrast(90%);
+}
+
+.nav_btn {
+  @include m.boton(hsl(40 100% 60%),inline-block);      
+}
+
+h1 {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}

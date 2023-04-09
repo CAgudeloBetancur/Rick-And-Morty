@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Mitr:wght@300;400;700&family=Righteous&display=swap');
+
+// fuentes 
+
+$fuentePrincipal: 'Alata', sans-serif;
+$fuenteSecundaria: 'Mitr', sans-serif;
+$fuenteOpcional: 'Righteous', sans-serif;
+
+// Colores 
+
+$primario: hsl(0 0% 8%);
+$secundario: hsl(180 100% 50%);
+$claro: hsl(0 100% 100%);
+// Tamaño media querys
+
+$telefono: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$desktopXl: 1200px;

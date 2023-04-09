@@ -1,0 +1,78 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.formCont {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .form {
+    font-size: 1.7rem;
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2rem;
+    background-color: hsla(0 0% 90% / .6);
+    backdrop-filter: blur(.6rem);
+    border-radius: .75rem;
+    box-shadow: 0 0 2rem 1rem hsla(0 0% 10% / .7);
+
+    .formTitle {
+      text-align: center;
+      margin: 0 0 1rem 0;
+      font-size: 4rem;
+    }
+
+    .formLabel {
+      font-weight: bold;
+      text-shadow: 0 0 .2rem hsla(160 90% 60% / .8);
+      margin-top: 1rem;
+    }
+
+    .formInput {
+      margin: .5rem 0 1rem 0;
+      border-radius: .25rem;
+      border: none;
+      padding: .4rem .75rem;
+      background-color: hsl(120 70% 70%);
+      box-shadow: 0 0 1rem hsla(160 90% 60% / .3);
+      color: hsl(160 70% 20%);
+    }
+
+    .formBtn {
+      margin: 1.5rem auto 0 auto;
+      padding: 1rem 1.5rem;
+      @include m.boton(hsl(140 70% 30%),block);
+
+      &.loginDisabled {
+        color: hsl(0 0% 40%);
+        border-color: hsl(0 0% 40%);
+        text-shadow: none;
+
+        &:hover {
+          color: hsl(0 0% 40%);
+          background-color: transparent;
+          box-shadow: none;
+        }
+      }
+
+    }
+
+    .formError {
+      background-color: hsl(0 90% 40%);
+      padding: .5rem;
+      color: v.$claro;
+      font-family: v.$fuenteOpcional;
+      font-weight: 500;
+      margin: 0 0 1rem 0;
+    }
+
+
+  }
+}

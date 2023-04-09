@@ -1,0 +1,32 @@
+.animated {
+  animation: loginBtnAnimation .2s ease backwards;
+}
+
+@keyframes loginBtnAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btnDelete.activeBtn {
+  opacity: 1;
+  display: inline-block;
+  // animation: btnElim .2s linear 1 forwards;
+}
+
+/* @keyframes btnElim {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    opacity: 1;
+    display: inline-block;
+  }
+} */

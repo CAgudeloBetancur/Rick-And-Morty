@@ -1,0 +1,141 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.nav {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 5;
+  margin: 0;
+  background-color: hsl(0 0% 80% / .2);
+  backdrop-filter: blur(.3rem);
+  box-shadow: 0 .3rem 2rem hsl(190 100% 50% / .2);
+  border-bottom: 1px solid hsl(0 0% 40% / .2);  
+  
+  .nav_container {
+    // margin: 0 auto;
+    max-width: 120rem;
+    width: 90%;
+    padding: 1rem 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    
+    .nav_title {
+      max-width: 15rem;
+    }
+
+    .nav_btnContainer{
+      display: flex;
+      justify-content: space-evenly;  
+      align-items: center;    
+
+      @include m.tablet {
+        flex-direction: column;
+      }
+
+      @include m.desktop {
+        flex-direction: row;
+      }
+    }
+
+    @include m.tablet {
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 1.2rem 1rem;
+    }
+    
+    @include m.desktop {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    
+    .nav_search {
+      display: flex;
+      gap: 2rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @include m.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+
+        @include m.tablet {
+          flex-direction: row;
+        }
+
+        label {
+          text-align: center;
+          font-size: 1.2rem;
+          color: hsl(150 80% 60%); 
+          font-weight: bold;
+          cursor: pointer;
+        }  
+    
+        input {
+          padding: .4rem;
+          border: none;
+          border-radius: .7rem;
+          background-color: hsl(190 80% 10%);
+          box-shadow: 0 0 .5rem hsl(190 100% 50% / .7);
+          color: hsl(150 80% 60%);
+          font-size: 1.4rem;
+    
+          &:focus {
+            outline: solid 1px hsl(43 100% 60% / .2);
+          }
+    
+          &::placeholder {
+            color: hsl(0 0% 50%);
+          }
+    
+          &::selection {
+            background-color: hsl(190 100% 50% / .4);
+            color: hsl(190 100% 70%) 
+          }
+        }      
+
+      }
+
+    }
+
+    .nav_btnLink {
+      font-size: 1.5rem;
+      padding: .3rem 2rem;
+      background-color: transparent;
+      border: none;
+      transition: transform .1s linear;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      .nav_link { 
+        color: hsl(150 80% 60%);
+        border: none;
+        text-decoration: none;
+        background-color: transparent;
+        transition: font-weight .2s linear, text-shadow .2s linear;
+
+        &:hover {
+          text-shadow: 0 0 .2rem hsl(40 100% 60%);
+          color: hsl(40 100% 60%);
+        }
+      }
+    }
+
+  }
+}
