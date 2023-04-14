@@ -1,23 +1,57 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { NavLink,useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { addFav,removeFav } from "../redux/actions";
 
-export default function Card(
-   {id,name,status,species,gender,origin,image,onClose,agrupar}
-) {
+const Card = (
+   {id,name,status,species,gender,origin,image,onClose,agrupar,addFav,removeFav,myFavorites,allCharacters}
+) => {
+
+   const currentPath = useLocation();
+
+   let noFavorites = currentPath.pathname !== "/favorites" ;
+   let inDetail = currentPath.pathname === "/detail/:id" ;
 
    const [cardState, setCardState] = useState(false);
    const [vaciar,setVaciar] = useState(false);
    const [animClass, setAnimClass] = useState('');
+   const [isFav,setIsFav] = useState(false);
 
-   const handleBtnClick = () => {
+   const handleFavorite = () => {
+      if(isFav) {
+         setIsFav(false);
+         removeFav(id);
+      }else if(!isFav) {
+         setIsFav(true);
+         addFav({id,name,status,species,gender,origin,image})
+      }
+      
+   }
+
+   useEffect(() => {
+      myFavorites.forEach((fav) => {
+         if (fav.id === id) {
+            setIsFav(true);
+         }
+      });
+      // console.log(cardState)
+      /* console.log('Favoritos: ')
+      console.log(myFavorites);
+      console.log('Todos los Favoritos: ')
+      console.log(allCharacters); */
+   }, [myFavorites,allCharacters]);
+
+   const handleBtnClick = (e) => {
       onClose(id,cardState);
    }
    
    const handleCardClick = () => {
-      setCardState(cardState => !cardState);
-      setAnimClass(' animated');
-      setVaciar(false);
-      agrupar(id,vaciar);
+      if(currentPath.pathname === "/home") {
+         setCardState(cardState => !cardState);
+         setAnimClass(' animated');
+         setVaciar(false);
+         agrupar(id,vaciar);
+      }
    }
 
    const handleAnimEnd = () => {
@@ -26,7 +60,9 @@ export default function Card(
 
    const handleNavLinkClick = () => {
       setVaciar(true);
-      agrupar(0,vaciar);
+      if(noFavorites) {
+         agrupar(0,vaciar);
+      }
    }
 
    let toggleClassCheck = cardState ? ' active' : '';
@@ -34,7 +70,14 @@ export default function Card(
    return (
       <div key={id} className={`card_cont${animClass}`} onAnimationEnd={handleAnimEnd}>
          <div className="card_divBtnClose">
-            <button className="btnClose" onClick={handleBtnClick}>X</button>
+            <button onClick={handleFavorite}>{isFav ? '❤️' : '🤍'}</button>
+            {  
+               noFavorites && 
+               <button 
+                  className="btnClose" 
+                  onClick={handleBtnClick}
+               >X</button>
+            }
          </div>
          <div className={`card${toggleClassCheck}`}>
             <div className="card_divImg" onClick={handleCardClick}>
@@ -51,20 +94,29 @@ export default function Card(
                   <h4>Status</h4>
                   <p>{status}</p>
                </div>
-               <div>
-                  <h4>Species</h4>
-                  <p>{species}</p>
-               </div>
-               <div>
-                  <h4>Gender</h4>
-                  <p>{gender}</p>
-               </div>
-               <div>
-                  <h4>Origin</h4>
-                  <p>{origin}</p>
-               </div>
             </div>
          </div>
       </div>
    );
 }
+
+const mapStateToProps = (state) => {
+   return {
+      myFavorites : state.myFavorites,
+      allCharacters: state.allCharacters
+   }
+}
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+      addFav: (character) => {
+         dispatch(addFav(character));
+      },
+      removeFav: (id) => {
+         dispatch(removeFav(id));
+      }
+   }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Card);

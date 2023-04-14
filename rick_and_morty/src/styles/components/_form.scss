@@ -13,7 +13,7 @@
 
   .form {
     font-size: 1.7rem;
-    width: 35rem;
+    width: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -65,9 +65,10 @@
     }
 
     .formError {
-      background-color: hsl(0 90% 40%);
+      border: 2px solid hsla(0 90% 40% / .7);
+      color: hsla(0 90% 40% / .7);
+      border-radius: .4rem;
       padding: .5rem;
-      color: v.$claro;
       font-family: v.$fuenteOpcional;
       font-weight: 500;
       margin: 0 0 1rem 0;

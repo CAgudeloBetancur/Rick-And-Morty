@@ -2,9 +2,9 @@ const validation = (el,er,setEr,dt,setExistErr) => {
     if(el === "email") {
 
       let errEmail = [
-        '• Este campo no puede estar vacio',
-        '• Formato no valido',
-        '• No debe tener más de 35 caracteres'];
+        '"Email" no puede estar vacio',
+        'Formato de correo no valido',
+        '"Email" contiene más de 35 caracteres'];
 
       let emailFormat = /([a-zA-Z]+[0-9]*)@{1}([a-z]+[0-9]*)\.{1}[a-z]/.test(dt.email);
 
@@ -32,24 +32,26 @@ const validation = (el,er,setEr,dt,setExistErr) => {
     } else if(el === "password") {
 
       let errPassword = [
-        '• Este campo no puede estar vacío',
-        '• Debe tener al menos un número',
-        '• Debe tener entre 6 y 10 caracteres'
+        '"Password" no puede estar vacío',
+        '"Password" debe contener un número',
+        '"Password" debe tener entre 6 y 10 caracteres'
       ];
 
       const passwordFormat = /([a-zA-z]*[0-9]+)/.test(dt.password);
       const lengthComp = !((dt.password.length) < 6 ||(dt.password.length) > 10) 
 
-      if( !lengthComp && !passwordFormat) {
+      if(dt.password.length > 0 && (!lengthComp && !passwordFormat)) {
         errPassword.shift();
         setExistErr(true);
-      } else if (!lengthComp && passwordFormat ){
+      } else if (dt.password.length > 0 && (!lengthComp && passwordFormat )){
         errPassword.splice(0,2);
         setExistErr(true);
       } else if (lengthComp && !passwordFormat) {
         errPassword.shift();
         errPassword.pop();
         setExistErr(true);
+      } else if(dt.password.length === 0) {
+        errPassword.splice(1,2);
       } else {
         errPassword = [];
         setExistErr(false);

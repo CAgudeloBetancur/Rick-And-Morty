@@ -24,6 +24,10 @@ export default function Nav({ fSearch,logout }) {
           <button className="nav_btnLink">
             <NavLink className="nav_link" to="/home">Home</NavLink>
           </button>
+
+          <button className="nav_btnLink">
+            <NavLink className="nav_link" to="/favorites">Favorites</NavLink>
+          </button>
         </div>
 
         <SearchBar fSearch={fSearch} />

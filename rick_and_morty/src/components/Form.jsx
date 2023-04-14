@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import validation from "../validation";
 
 const Form = ({login}) => {
@@ -14,7 +14,6 @@ const Form = ({login}) => {
 
   useEffect(()=> {
     validation(nomElem,errors,setErrors,userData,setExistErr);
-    console.log(existErr);
   },[userData,existErr])
 
   const handleChange = (e) => {
@@ -38,15 +37,30 @@ const Form = ({login}) => {
     setAnimClass('');
   }
 
-  const claseDisabled = existErr ? ' loginDisabled' : '';
+  const claseDisabled = !errors.password || !errors.email || existErr ? ' loginDisabled' : '';
 
   return (
     <div className="formCont">
       <form className="form">
           <h3 className="formTitle">Login</h3>
 
+          { errors.email && errors.email.map((x,i) => {
+              return(
+                <p key={i} className="formError">{x}</p>
+              )
+            })
+          }
+
+          { errors.password && errors.password.map((x,i) => {
+              return (
+                <p key={i} className="formError">{x}</p>
+              )
+            })
+          }
+
           <label className="formLabel">Email:</label>
           <input
+            autoFocus
             className="formInput"
             type="email" 
             value={userData.email}
@@ -55,12 +69,6 @@ const Form = ({login}) => {
             placeholder="Correo"
           />
 
-          { errors.email && errors.email.map((x,i) => {
-              return(
-                <p key={i} className="formError">{x}</p>
-              )
-            })
-          }
 
           <label className="formLabel">Password:</label>
           <input
@@ -72,12 +80,6 @@ const Form = ({login}) => {
             placeholder="Clave"
           />
 
-          { errors.password && errors.password.map((x,i) => {
-              return (
-                <p key={i} className="formError">{x}</p>
-              )
-            })
-          }
 
           <button 
             className={`formBtn${claseDisabled}${animClass}`}  

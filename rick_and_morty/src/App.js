@@ -6,6 +6,7 @@ import Nav from './components/Nav.jsx';
 import About from './components/About';
 import Detail from './components/Detail';
 import Form from './components/Form';
+import Favorites from './components/Favorites';
 import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 
 function App() {
@@ -86,6 +87,8 @@ function App() {
       }
       setListaBorrar([]);            
    }
+
+   // if(rutaActual.pathname !== '/home') setListaBorrar([]);
    
    useEffect(() => {
       console.log(`A borrar: ${listaBorrar}`);
@@ -115,7 +118,7 @@ function App() {
    
    return (
       <div className='App'>
-         {rutaActual.pathname !== '/' && <Nav fSearch={onSearch} logout={logout}/>}
+         {rutaActual.pathname !== '/' && <Nav fSearch={onSearch} logout={logout} agrupar={agruparID}/>}
          <div className='appContenedor'></div>
          <Routes>
             <Route path="/" element={<Form login={login}/>}/>
@@ -127,16 +130,19 @@ function App() {
                   agrupar={agruparID}
                />}
             />
-            <Route path='/about' element={<About/>}/>            
-            <Route path='/detail/:id' element={<Detail/>}/>            
+            <Route path='/about' element={<About agrupar={agruparID}/>}/>            
+            <Route path='/detail/:id' element={<Detail/>}/>
+            <Route path='/favorites' element={<Favorites agrupar={agruparID}/>}/>            
          </Routes>
-            <button 
-               className={`btnDelete${activarBtn}${animClass}`} 
-               onClick={handleBtnElimVariosClick}
-               onAnimationEnd={elimVarios}
-            >
-               <img src={elim} alt=""></img>
-            </button>
+         
+         <button 
+            className={`btnDelete${activarBtn}${animClass}`} 
+            onClick={handleBtnElimVariosClick}
+            onAnimationEnd={elimVarios}
+         >
+            <img src={elim} alt=""></img>
+         </button>
+      
       </div>
    );
 }
