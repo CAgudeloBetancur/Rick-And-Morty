@@ -70,7 +70,7 @@ const Card = (
    return (
       <div key={id} className={`card_cont${animClass}`} onAnimationEnd={handleAnimEnd}>
          <div className="card_divBtnClose">
-            <button onClick={handleFavorite}>{isFav ? '❤️' : '🤍'}</button>
+            <button className="btnFavorito" onClick={handleFavorite}>{isFav ? '❤️' : '🤍'}</button>
             {  
                noFavorites && 
                <button 

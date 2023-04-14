@@ -40,6 +40,7 @@
     margin-bottom: .5rem;
     display: flex;
     justify-content: flex-end;
+    gap: 1.5rem;
     
     .btnClose {
       display: flex;
@@ -59,8 +60,23 @@
       &:hover {
         box-shadow: .03rem .03rem 2rem hsl(0 100% 80%);
         background-color: hsl(0 100% 70%);
-        transform: scale(1.3);
+        transform: scale(1.15);
         font-weight: bold;
+      }
+    }
+
+    .btnFavorito {
+      background-color: hsl(100 100% 40%);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: none;
+      transition: background-color .2s ease, box-shadow .2s ease, transform .15s linear;
+
+      &:hover {
+        box-shadow: 0 0 1.5rem hsl(100 100% 60%);
+        background-color: hsl(100 100% 50%);
+        transform: scale(1.15);
       }
     }
   }

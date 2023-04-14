@@ -23,38 +23,49 @@ const Favorites = ({myFavorites,allCharacters,agrupar}) => {
     console.log(myFavorites);
   }
 
+  const ocultar = myFavorites.length === 0 || allCharacters.length === 0 
+    ? " ocultar"
+    : "";
+
   return (
-    <div style={{position: 'relative'}}>
-      <select onChange={handleOrder} name="selectOrder">
-        <option value="" selected>-- Ordenar --</option>
-        <option value="A">Ascendente</option>
-        <option value="D">Descendente</option>
-      </select>
-      <select onChange={handleFilter} name="selectFilter">
-        <option value="" selected>-- Filtrar --</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Genderless">Genderless</option>
-        <option value="unknown">unknown</option>
-        <option value="all">All</option>
-      </select>
-      {
-        myFavorites?.map((x,i) => {
-          return(
-            <Card
-              key={i}
-              id={x.id}
-              name={x.name}
-              status={x.status}
-              species={x.species}
-              gender={x.gender}
-              origin={x.origin}
-              image={x.image}
-              agrupar={agrupar}
-            />
-          )
-        })
-      }
+    <div>
+      <div className="selectContainer">
+        <div className="filterContainer">
+          <h4>Filtros</h4>
+          <select onChange={handleOrder} name="selectOrder">
+            <option value="" selected>-- Ordenar --</option>
+            <option value="A">Ascendente</option>
+            <option value="D">Descendente</option>
+          </select>
+          <select onChange={handleFilter} name="selectFilter">
+            <option value="" selected>-- Filtrar --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Genderless">Genderless</option>
+            <option value="unknown">unknown</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+      <div className={`cards_contenedor${ocultar}`}>
+        {
+          myFavorites?.map((x,i) => {
+            return(
+              <Card
+                key={i}
+                id={x.id}
+                name={x.name}
+                status={x.status}
+                species={x.species}
+                gender={x.gender}
+                origin={x.origin}
+                image={x.image}
+                agrupar={agrupar}
+              />
+            )
+          })
+        }
+      </div>
     </div>
   )
 }
