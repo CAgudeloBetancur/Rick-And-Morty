@@ -7,20 +7,36 @@ const initialState = {
 
 const reducer = (state = initialState, {type,payload}) => {
   switch(type) {
+    // ! ADD_FAV Versión nueva
     case ADD_FAV:
+      return { 
+        ...state, 
+        myFavorites: payload, 
+        allCharacters: payload 
+      };
+    // ! ADD_FAV Versión anterior
+    /* case ADD_FAV:
       return {
         ...state,
         myFavorites: [...state.myFavorites, payload],
         allCharacters: [...state.myFavorites, payload]
-      }
-    case REMOVE_FAV:
+      } */
+    // ! REMOVE_FAV anterior  
+    /* case REMOVE_FAV:
       const quedanFav = state.myFavorites.filter(x => x.id !== payload)
       const quedanAll = state.allCharacters.filter(x => x.id !== payload);
       return {
         ...state,
         myFavorites: quedanFav,
         allCharacters: quedanAll
-      }
+      } */
+    // ! REMOVE_FAV nuevo
+    case REMOVE_FAV:
+      return { 
+        ...state, 
+        myFavorites: payload,
+        allCharacters: payload
+      };
     case FILTER:
       const filtrados = state.allCharacters.filter(x => x.gender === payload)
       return {

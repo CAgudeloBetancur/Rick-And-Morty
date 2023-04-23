@@ -23,7 +23,7 @@ const Card = (
          removeFav(id);
       }else if(!isFav) {
          setIsFav(true);
-         addFav({id,name,status,species,gender,origin,image})
+         addFav({id : +id,name,status,species,gender,origin,image})
       }
       
    }
@@ -35,11 +35,11 @@ const Card = (
          }
       });
       // console.log(cardState)
-      /* console.log('Favoritos: ')
+      console.log('Favoritos: ')
       console.log(myFavorites);
       console.log('Todos los Favoritos: ')
-      console.log(allCharacters); */
-   }, [myFavorites,allCharacters]);
+      console.log(allCharacters);
+   }, [myFavorites,allCharacters,id]);
 
    const handleBtnClick = (e) => {
       onClose(id,cardState);

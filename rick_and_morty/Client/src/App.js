@@ -25,11 +25,23 @@ function App() {
    // const URL_BASE = 'https://be-a-rym.up.railway.app/api/character';
    // const API_KEY = '28d5485db6dd.6bf5b4c90dcebb8cf27c';
 
-   function login(userData) {
+   // ! Login anterior
+   /* function login(userData) {
       if (userData.password === PASSWORD && userData.email === EMAIL) {
          setAccess(true);
          navigate('/home');
       }
+   } */
+
+   // ! Nuevo login
+   function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      });
    }
 
    useEffect(() => {
