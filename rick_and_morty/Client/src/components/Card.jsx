@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { NavLink,useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import { addFav,removeFav } from "../redux/actions";
+import { addFav,removeFav,filterCards } from "../redux/actions";
 
 const Card = (
    {id,name,status,species,gender,origin,image,onClose,agrupar,addFav,removeFav,myFavorites,allCharacters}
@@ -24,25 +24,26 @@ const Card = (
       }else if(!isFav) {
          setIsFav(true);
          addFav({id : +id,name,status,species,gender,origin,image})
-      }
-      
+      }      
    }
 
    useEffect(() => {
-      myFavorites.forEach((fav) => {
+      allCharacters.forEach((fav) => {
          if (fav.id === id) {
             setIsFav(true);
          }
       });
-      // console.log(cardState)
-      console.log('Favoritos: ')
-      console.log(myFavorites);
-      console.log('Todos los Favoritos: ')
-      console.log(allCharacters);
+      // removeFav(id);
+      // console.log(myFavorites);
+      // console.log(filtro); 
    }, [myFavorites,allCharacters,id]);
 
    const handleBtnClick = (e) => {
       onClose(id,cardState);
+      if(isFav) {
+         setIsFav(false);
+         removeFav(id);
+      }
    }
    
    const handleCardClick = () => {
@@ -51,6 +52,7 @@ const Card = (
          setAnimClass(' animated');
          setVaciar(false);
          agrupar(id,vaciar);
+         console.log(allCharacters)
       }
    }
 
@@ -114,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
       },
       removeFav: (id) => {
          dispatch(removeFav(id));
+      },
+      filterCards: (gender) => {
+         dispatch(filterCards(gender));
       }
    }
 }

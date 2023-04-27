@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {MdPersonSearch} from "react-icons/md";
 
 export default function SearchBar({fSearch}) {
    
@@ -23,7 +24,7 @@ export default function SearchBar({fSearch}) {
 
       <div className="nav_search">
          <div>
-            <label htmlFor="buscar">Buscar: </label>
+            <label htmlFor="buscar"><i><MdPersonSearch/></i></label>
             <input id="buscar" onKeyDown={handleKeyDown} onChange={handleChange} value={id} type='search' placeholder="id..."/>
          </div>
 

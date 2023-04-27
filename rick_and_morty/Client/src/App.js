@@ -1,5 +1,6 @@
 import elim from './assets/img/eliminar.png';
 import axios from 'axios';
+import { connect,useDispatch } from "react-redux";
 import { useState, useEffect} from 'react';
 import Cards from './components/Cards.jsx';
 import Nav from './components/Nav.jsx';
@@ -8,9 +9,13 @@ import Detail from './components/Detail';
 import Form from './components/Form';
 import Favorites from './components/Favorites';
 import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import { removeFav } from "./redux/actions";
+import {MdDeleteForever} from 'react-icons/md'
 
-function App() {
+function App({allCharacters,removeFav}) {
    
+   const dispatch = useDispatch();
+
    const rutaActual = useLocation();
    const [characters,setCharacters] = useState([]);
    const [vaciar,setVaciar] = useState(false);
@@ -34,14 +39,26 @@ function App() {
    } */
 
    // ! Nuevo login
-   function login(userData) {
+   async function login(userData) {
+
       const { email, password } = userData;
       const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+
+      try {
+         const {data} = await axios(URL + `?email=${email}&password=${password}`)
          const { access } = data;
          setAccess(data);
          access && navigate('/home');
-      });
+         !access && window.alert('Los datos no coinciden');
+      } catch (error) {
+         console.log(error);
+      }
+
+      /* axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      }); */
    }
 
    useEffect(() => {
@@ -52,9 +69,34 @@ function App() {
       setAccess(false);
    }
 
-   function onSearch(id) {
+   async function onSearch(id) {
          // axios(`${URL_BASE}/${id}?key=${API_KEY}`)
-         axios(`${URL_BASE}/${id}`)
+
+         try {
+
+            const {data} = await axios(`${URL_BASE}/${id}`)
+
+            if (data.name) {
+               let control = false;
+               for(let x of characters) {
+                  control = +x.id === data.id;
+                  if(control) break;
+               }
+               if(!control) {
+                  setCharacters((oldChars) => [...oldChars, data]);
+               } else {
+               window.alert(`${data.name} ya está aquí`);
+               }
+            } else {
+               window.alert('¡No hay personajes con este ID!');
+            }
+
+         } catch (error) {
+            window.alert('¡No hay personajes con este ID!');
+         }
+         
+
+         /* axios(`${URL_BASE}/${id}`)
             .then(({ data }) => {
                if (data.name) {
                   let control = false;
@@ -72,7 +114,7 @@ function App() {
                }
             }).catch(function(error){
                window.alert('¡No hay personajes con este ID!');
-            })         
+            })  */        
    }
 
    function onClose(id,cardState) {
@@ -93,7 +135,6 @@ function App() {
          if(listaBorrar.includes(id)) {
             listaBorrarAux = listaBorrar.filter(x => x !== id);
             setListaBorrar(listaBorrarAux);
-            console.log('entramos');
          }else {
             setListaBorrar([...listaBorrar,id]);
          }
@@ -112,12 +153,17 @@ function App() {
    
    const handleBtnElimVariosClick = () => {
       setAnimClass(' animated');
-      const seQuedan = [];
+      let seQuedan = [];
       for(let i = 0; i < characters.length; i++) {
          if(!listaBorrar.includes(characters[i].id) ) {
             seQuedan.push(characters[i]);
          }
          setCharacters(seQuedan);
+      }
+      for(let x of listaBorrar) {
+         for(let z of allCharacters) {
+            if(z.id === x) removeFav(x)
+         }
       }
    }
    
@@ -154,11 +200,28 @@ function App() {
             onClick={handleBtnElimVariosClick}
             onAnimationEnd={elimVarios}
          >
-            <img src={elim} alt=""></img>
+            <i><MdDeleteForever/></i>
          </button>
       
       </div>
    );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+   return {
+      allCharacters: state.allCharacters
+   }
+}
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+      removeFav: (id) => {
+         dispatch(removeFav(id));
+      }
+   }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
+
+// export default App;
