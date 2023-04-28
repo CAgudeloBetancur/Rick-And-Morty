@@ -4,16 +4,16 @@
   opacity: 1;
   width: 90%;
   max-width: 120rem;
-  padding: 3rem 3rem;
+  padding-top: 2rem;
   margin: 2rem auto;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  background-color: hsl(0 0% 80% / .1);
+  /* background-color: hsl(0 0% 80% / .1);
   backdrop-filter: blur(.4rem);
   border-radius: 1.5rem;
   box-shadow: 0 0 1.8rem hsl(0 0% 10% / .9), inset 0 0 .7rem .4rem hsl(0 0% 50% / .11); 
-  border: 1px solid hsl(0 0% 40% / .2);
+  border: 1px solid hsl(0 0% 40% / .2); */
 
   @include m.tablet {
     @include m.grid(3,2rem)

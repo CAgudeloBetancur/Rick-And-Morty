@@ -39,7 +39,8 @@ const Detail = () => {
   /* useEffect(() => {
     if(isLoaded){
       for(let ep of character.episode) {
-        axios(`${ep}?key=${API_KEY}`).then(
+        // axios(`${ep}?key=${API_KEY}`).then(
+        axios('http://localhost:3001/rickandmorty/character').then(
         ({ data }) => {
           if (data.name) {
               setEpisode(oldEp => [...oldEp,data]);
@@ -51,7 +52,7 @@ const Detail = () => {
       }
       return setEpisode([]);
     }
-  },[character,isLoaded]);  */ 
+  },[character,isLoaded]);   */
 
   return (
     <div className="detail_cont">

@@ -5,14 +5,15 @@
   margin: 10rem auto 0 auto;
   color: hsl(80 100% 90%);
   padding: 2rem;
+  border: .03rem solid hsl(0 100% 100% / .1);
   display: flex;
   flex-direction: column;
   font-size: 1.8rem;
   gap: 2rem;
-  background-color: hsla(0 0% 80% / .3);
+  background-color: hsla(0 0% 8% / .6);
   border-radius: .5rem;
   backdrop-filter: blur(.6rem);
-  box-shadow: 0 0 .8rem hsla(0 0% 70% / .3), inset 0 0 .6rem hsla(0 0% 70% / .4);
+  box-shadow: 0 0 .8rem hsla(0 0% 40% / .2), inset 0 0 .6rem hsla(0 0% 70% / .2);
 
   h1 {
     text-align: center;

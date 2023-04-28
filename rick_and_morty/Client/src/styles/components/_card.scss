@@ -7,11 +7,11 @@
   text-align: left;
   margin: 0 auto;
   color: v.$claro;
-  background-color: hsl(0 80% 100% / .1);
-  backdrop-filter: blur(.5rem);
-  border: .05rem solid hsl(0 100% 100% / .05);
+  background-color: hsl(0 0% 5% / .5);
+  backdrop-filter: blur(.7rem);
+  border: .05rem solid hsl(0 100% 100% / .1);
   box-shadow: 0 0 .7rem .3rem hsl(0 0% 0% / .5),
-              inset 0 0 1.3rem hsl(0 100% 100% / .2);
+              inset 0 0 1rem hsl(0 100% 100% / .1);
   transition: transform .15s linear, box-shadow .15s linear;
 
   .card {
