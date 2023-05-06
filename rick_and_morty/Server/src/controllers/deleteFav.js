@@ -1,13 +1,13 @@
 const {Favorite} = require('../DB_connection');
 
 const deleteFav = async (req,res) => {
-  const id = req.params
+  const {id} = req.params
   try {
     // const fav = await Favorite.findOne({where: {id}});
     // await fav.removeUser(id);
     await Favorite.destroy({
       where: {
-        id,
+        id: +id
       }
     })
 
